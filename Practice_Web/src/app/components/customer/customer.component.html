@@ -1,0 +1,138 @@
+<div>
+    <div class="mb-2 d-flex justify-content-between">
+        <div>
+            <h4>Customer List</h4>
+        </div>
+        <div>
+            <button kendoButton (click)="AddCustomerClick()" fillMode="outline"
+            themeColor="success"> + Add</button>
+            
+        </div>
+    </div>
+    
+    <kendo-grid [data]="customerList" 
+    style="width: 100%;"
+    [height]="350"
+    >
+        <kendo-grid-column field="CustomerName" title="Customer Name" [width]="400">
+        </kendo-grid-column>
+        <kendo-grid-column field="Phone" title="Phone" [width]="300">
+        </kendo-grid-column>
+        <kendo-grid-column field="Address" title="Address" [width]="300">
+        </kendo-grid-column>
+        <kendo-grid-column title="Actions">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <button (click)="onEditClick(dataItem.CustomerId)" class="btn btn-sm btn-outline-primary mx-2">
+                    Edit
+                </button>
+              <button (click)="onDeleteClick(dataItem.CustomerId)" class="btn btn-sm btn-outline-danger my-2">
+                Delete
+              </button>
+            </ng-template>
+          </kendo-grid-column>
+      </kendo-grid>
+</div>
+
+<!-- save or update modal -->
+<div id="saveOrUpdateModal" class="modal fade">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="border-radius: 10px;">
+        <div class="modal-header bg-primary d-flex justify-content-between">
+            <h5 class="modal-title text-white" style="font-size:15px;">
+                <span *ngIf="customerForm.get('CustomerId')?.value === 0">Save Customer</span>
+                <span *ngIf="customerForm.get('CustomerId')?.value !== 0">Update Customer</span>
+            </h5>
+            <button type="button" class="btn btn-sm pull-right" aria-label="Close"
+                    (click)="SaveOrUpdateCustomerCancelModal()" style="background-color: rgb(255, 255, 255); color:#0d99ff">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="customerForm" (ngSubmit)="SaveOrUpdateClick()">
+
+                <!-- Hidden CustomerId Field -->
+                 <div class="row mb-2">
+
+                    <div class="col-md-12">
+                        <input formControlName="CustomerId" type="hidden" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <!-- CustomerName Field -->
+                        <label for="customerName">Customer Name</label>
+                        <input class="form-control" id="customerName" formControlName="CustomerName" placeholder="Customer Name"/>
+              
+                    </div>
+
+                 </div>
+                
+              
+                 <div class="row">
+
+                    <div class="col-md-6">
+                        <!-- Phone Field -->
+                        <label for="phone">Phone</label>
+                        <input class="form-control" id="phone" formControlName="Phone" placeholder="Phone"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- CustomerName Field -->
+                        <label for="address">Address</label>
+                        <textarea rows="1" class="form-control" id="address" formControlName="Address" placeholder="Address"></textarea>
+              
+                    </div>
+
+                 </div>
+
+                
+              </form>
+              
+        </div>
+        <div class="modal-footer">
+
+            <!-- Submit Button -->
+            <button kendoButton themeColor="success" type="submit" (click)="SaveOrUpdateClick()" [disabled]="!customerForm.valid">Submit</button>
+
+            <button class="btn btn-sm btn-warning"
+                    (click)="SaveOrUpdateCustomerCancelModal()">
+                Cancel
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- delete confirm model -->
+<div id="confirmModal" class="modal fade">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="border-radius: 10px;">
+        <div class="modal-header bg-primary d-flex justify-content-between">
+            <h5 class="modal-title text-white" style="font-size:15px;">
+                Confirm!
+            </h5>
+            <button type="button" class="btn btn-sm pull-right" aria-label="Close"
+                    (click)="ConfirmCancelModal()" style="background-color: white; color:#0d99ff">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          
+        </div>
+        <div class="modal-body">
+            <h5 style="font-size:15px;">
+                Are you sure you want to <span style="font-weight: 600;color:red;">delete </span>this customer?
+            </h5>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-sm btn-danger"
+            (click)="ConfirmYesClick(deletedCustomerId)" value="1" style="margin-right: 5px;">
+                Yes
+            </button>
+          <button class="btn btn-sm btn-warning"
+                  (click)="ConfirmCancelModal()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
