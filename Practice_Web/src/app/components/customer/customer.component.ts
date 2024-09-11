@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageChangeEvent } from '@progress/kendo-angular-grid';
 import { subscribeOn } from 'rxjs';
@@ -135,7 +135,7 @@ export class CustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       CustomerId: [0],  // Hidden field
       CustomerName: ['', Validators.required],
-      Phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      Phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       Address: ['', Validators.required]
     });
   }

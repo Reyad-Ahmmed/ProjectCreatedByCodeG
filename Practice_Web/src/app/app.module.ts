@@ -10,14 +10,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { ParentComponentComponent } from './components/parent-component/parent-component.component';
+import { ChildComponentComponent } from './components/child-component/child-component.component';
+import { NgOnInitTestComponent } from './components/ng-on-init-test/ng-on-init-test.component';
 
- 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerComponent
+    CustomerComponent,
+    ParentComponentComponent,
+    ChildComponentComponent,
+    NgOnInitTestComponent
   ],
   imports: [
     BrowserModule,

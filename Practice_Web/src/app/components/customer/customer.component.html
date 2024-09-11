@@ -2,10 +2,11 @@
     <div class="mb-2 d-flex justify-content-between">
         <div>
             <h4>Customer List</h4>
+            
         </div>
         <div>
-            <button kendoButton (click)="AddCustomerClick()" fillMode="outline"
-            themeColor="success"> + Add</button>
+            <button kendoButton (click)="AddCustomerClick()"
+            themeColor="success" title="Add New Customer"> + New</button>
             
         </div>
     </div>
@@ -22,11 +23,11 @@
         </kendo-grid-column>
         <kendo-grid-column title="Actions">
             <ng-template kendoGridCellTemplate let-dataItem>
-                <button (click)="onEditClick(dataItem.CustomerId)" class="btn btn-sm btn-outline-primary mx-2">
-                    Edit
+                <button (click)="onEditClick(dataItem.CustomerId)" class="btn btn-sm btn-primary mx-2" title="Edit Customeer">
+                    <i class="fa fa-pencil"></i>
                 </button>
-              <button (click)="onDeleteClick(dataItem.CustomerId)" class="btn btn-sm btn-outline-danger my-2">
-                Delete
+              <button (click)="onDeleteClick(dataItem.CustomerId)" class="btn btn-sm btn-danger my-2" title="Delete Customer">
+                <i class="fa fa-trash"></i>
               </button>
             </ng-template>
           </kendo-grid-column>
@@ -74,6 +75,8 @@
                         <!-- Phone Field -->
                         <label for="phone">Phone</label>
                         <input class="form-control" id="phone" formControlName="Phone" placeholder="Phone"/>
+
+                        
                     </div>
 
                     <div class="col-md-6">
@@ -92,9 +95,12 @@
         <div class="modal-footer">
 
             <!-- Submit Button -->
-            <button kendoButton themeColor="success" type="submit" (click)="SaveOrUpdateClick()" [disabled]="!customerForm.valid">Submit</button>
+            <button kendoButton themeColor="success" type="submit" (click)="SaveOrUpdateClick()" [disabled]="!customerForm.valid">
+                <span *ngIf="customerForm.get('CustomerId')?.value === 0">Save</span>
+                <span *ngIf="customerForm.get('CustomerId')?.value !== 0">Update</span>
+            </button>
 
-            <button class="btn btn-sm btn-warning"
+            <button class="btn btn-sm btn-danger"
                     (click)="SaveOrUpdateCustomerCancelModal()">
                 Cancel
             </button>

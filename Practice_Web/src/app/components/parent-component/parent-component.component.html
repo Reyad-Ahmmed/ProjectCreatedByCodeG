@@ -1,0 +1,14 @@
+<h5>Parent component 1st value</h5>
+
+<input [(ngModel)]="firstname">
+<input [(ngModel)]="lastName">
+<input [(ngModel)]="age" type="number">
+
+
+  <app-child-component 
+    [firstname]="firstname"
+    [lastName]="lastName"
+    [age]="age"
+    >
+
+  </app-child-component>

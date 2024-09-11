@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@progress/kendo-angular-grid": "^7.2.0",
+    "@progress/kendo-angular-icons": "^16.8.0",
     "@progress/kendo-angular-intl": "^4.0.0",
     "@progress/kendo-angular-l10n": "^4.0.0",
     "@progress/kendo-angular-popup": "^5.0.0",
@@ -28,6 +29,7 @@
     "@progress/kendo-theme-default": "^6.0.0",
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
